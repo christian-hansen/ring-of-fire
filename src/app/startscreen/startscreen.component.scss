@@ -8,21 +8,35 @@
     justify-content: center;
     align-items: center;
 
+    .titlecontainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     div {
         font-size: 128px;
         font-weight: 800;
-        color: white;
-        margin-bottom: 100px;
-        color: red;
+        line-height: 130px;
+        color: rgb(255, 0, 0);
+        width: 50%;
     }
 
     button {
-        font-size: 80px;
+        font-size: 64px;
+        width: 50%;
         border-radius: 20px;
         cursor: pointer;
 
         &:hover {
             background-color: yellow;
         }
+    }
+
+    img {
+        height: 100%;
+        width: 45%;
+        z-index: 2;
+        background-color: none;
     }
 }

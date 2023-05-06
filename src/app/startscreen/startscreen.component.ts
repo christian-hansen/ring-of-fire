@@ -21,5 +21,4 @@ newGame() {
   this.router.navigateByUrl('/game')
 }
 
-
 }
