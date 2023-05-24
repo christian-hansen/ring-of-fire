@@ -1,7 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+import {
+  Firestore,
+  collection,
+  collectionData,
+  doc,
+  setDoc,
+  addDoc,
+  getDoc,
+  docData,
+} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -9,14 +21,39 @@ import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player
   styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
+  firestore: Firestore = inject(Firestore);
   pickCardAnimation = false;
   currentCard: string = '';
   game: Game;
+  //s$: Observable<any[]>;
+  games: any;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private router: ActivatedRoute) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.newGame();
+    this.router.params.subscribe(async (params) => {
+      console.log(params['id']);
+      const gamesCollection = collection(this.firestore, 'games');
+      const gameDocRef = doc(gamesCollection, params['id']);
+
+      docData(gameDocRef).subscribe((game:any) => {
+        console.log(game);
+        this.game.players = game.players;
+        this.game.stack = game.stack;
+        this.game.playedCards = game.currentPlayer;
+        this.game.currentPlayer = game.currentPlayer;
+    });
+  });
+  }
+
+  async newGame() {
+    this.game = new Game();
+
+    const gamesCollection = collection(this.firestore, 'games');
+
+    let gameJson = this.game.toJSON();
+    // await addDoc(gamesCollection, gameJson);
   }
 
   takeCard() {
@@ -33,22 +70,19 @@ export class GameComponent implements OnInit {
     }
   }
 
-  newGame() {
-    this.game = new Game();
-    console.log(this.game);
-  }
-
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
     dialogRef.afterClosed().subscribe((name: string) => {
-      if(name && name.length > 0) {
-      this.game.players.push(name);}
+      if (name && name.length > 0) {
+        this.game.players.push(name);
+      }
     });
   }
 
   nextPlayer() {
     this.game.currentPlayer++;
-    this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+    this.game.currentPlayer =
+      this.game.currentPlayer % this.game.players.length;
   }
 }
