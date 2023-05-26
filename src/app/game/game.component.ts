@@ -20,6 +20,7 @@ export class GameComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
   game: Game;
   gameId: string;
+  gameOver = false;
 
   constructor(public dialog: MatDialog, private router: ActivatedRoute) {}
 
@@ -53,7 +54,9 @@ export class GameComponent implements OnInit {
   }
 
   takeCard() {
-    if (!this.game.pickCardAnimation) {
+    if (this.game.stack.length == 0) {
+      this.gameOver = true;
+    } else if (!this.game.pickCardAnimation) {
       this.game.currentCard = this.game.stack.pop();
       this.game.pickCardAnimation = true;
 

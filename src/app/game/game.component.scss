@@ -87,3 +87,17 @@ overflow-y: hidden;
     margin-left: 8px;
   }
 }
+
+.gameOver {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    height: 100vh;
+
+    img {
+        width: 100vw;
+        @media (max-width: 720px) {
+        transform: scale(2);}
+    }
+}
