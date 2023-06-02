@@ -10,6 +10,7 @@ import {
   docData,
 } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { EditPlayerComponent } from '../edit-player/edit-player.component';
 
 @Component({
   selector: 'app-game',
@@ -33,6 +34,7 @@ export class GameComponent implements OnInit {
 
       docData(gameDocRef).subscribe((game: any) => {
         this.game.players = game.players;
+        this.game.player_images = game.player_images;
         this.game.stack = game.stack;
         this.game.playedCards = game.playedCards;
         this.game.currentPlayer = game.currentPlayer;
@@ -76,6 +78,7 @@ export class GameComponent implements OnInit {
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
         this.game.players.push(name);
+        this.game.player_images.push('profile4.png');
         this.saveGame();
       }
     });
@@ -85,5 +88,18 @@ export class GameComponent implements OnInit {
     this.game.currentPlayer++;
     this.game.currentPlayer =
       this.game.currentPlayer % this.game.players.length;
+  }
+
+  editPlayer(playerId: number) {
+    console.log('Edit player', playerId);
+    const dialogRef = this.dialog.open(EditPlayerComponent);
+
+    dialogRef.afterClosed().subscribe((change: string) => {
+      if (change) {
+        console.log('received change', change);
+        this.game.player_images[playerId] = change;
+        this.saveGame();
+      }
+    });
   }
 }

@@ -1,0 +1,7 @@
+<h1 mat-dialog-title>Edit Player</h1>
+
+<div mat-dialog-content>Change name</div>
+<div mat-dialog-content>...</div>
+
+<div mat-dialog-content>Choose an avatar</div>
+<img class="profilepicture" [mat-dialog-close]="picture" *ngFor="let picture of allProfilePictures" src="./assets/img/profile/{{ picture }}">

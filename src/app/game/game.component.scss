@@ -101,3 +101,11 @@ overflow-y: hidden;
         transform: scale(2);}
     }
 }
+
+app-player, app-player-mobile {
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(1.1);
+    }
+}
