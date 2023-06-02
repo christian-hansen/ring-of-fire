@@ -22,8 +22,13 @@ export class GameComponent implements OnInit {
   game: Game;
   gameId: string;
   gameOver = false;
+  href: string;
 
-  constructor(public dialog: MatDialog, private router: ActivatedRoute) {}
+  constructor(public dialog: MatDialog, private router: ActivatedRoute) {
+        console.log(this.router.url['value'][0]);
+        console.log(this.router.url['value'][1]);
+    
+  }
 
   async ngOnInit(): Promise<void> {
     this.newGame();

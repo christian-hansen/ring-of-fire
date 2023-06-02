@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-player',
@@ -14,7 +15,13 @@ allProfilePictures = [
   'profile5.png',
   'profile6.png',
 ];
+name: string = '';
 
+constructor(private dialogRef: MatDialogRef<EditPlayerComponent>) {
 
+}
+onNoClick(): void {
+  this.dialogRef.close();
+}
 
 }
