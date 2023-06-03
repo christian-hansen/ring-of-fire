@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+
 import {
   Firestore,
   collection,
@@ -22,12 +23,13 @@ export class GameComponent implements OnInit {
   game: Game;
   gameId: string;
   gameOver = false;
+  gamePlayable = false;
   href: string;
+  defaultPlayerImage: string = 'profile5.png';
 
   constructor(public dialog: MatDialog, private router: ActivatedRoute) {
-        console.log(this.router.url['value'][0]);
-        console.log(this.router.url['value'][1]);
-    
+    console.log(this.router.url['value'][0]);
+    console.log(this.router.url['value'][1]);
   }
 
   async ngOnInit(): Promise<void> {
@@ -61,19 +63,23 @@ export class GameComponent implements OnInit {
   }
 
   takeCard() {
-    if (this.game.stack.length == 0) {
-      this.gameOver = true;
-    } else if (!this.game.pickCardAnimation) {
-      this.game.currentCard = this.game.stack.pop();
-      this.game.pickCardAnimation = true;
+    if (this.gamePlayable) {
+      if (this.game.stack.length == 0) {
+        this.gameOver = true;
+      } else if (!this.game.pickCardAnimation) {
+        this.game.currentCard = this.game.stack.pop();
+        this.game.pickCardAnimation = true;
 
-      this.nextPlayer();
-      this.saveGame();
-      setTimeout(() => {
-        this.game.pickCardAnimation = false;
-        this.game.playedCards.push(this.game.currentCard);
+        this.nextPlayer();
         this.saveGame();
-      }, 1000);
+        setTimeout(() => {
+          this.game.pickCardAnimation = false;
+          this.game.playedCards.push(this.game.currentCard);
+          this.saveGame();
+        }, 1000);
+      }
+    } else {
+      this.openDialog();
     }
   }
 
@@ -83,7 +89,8 @@ export class GameComponent implements OnInit {
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
         this.game.players.push(name);
-        this.game.player_images.push('profile4.png');
+        this.game.player_images.push(this.defaultPlayerImage);
+        this.isGamePlayable();
         this.saveGame();
       }
     });
@@ -101,10 +108,35 @@ export class GameComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((change: string) => {
       if (change) {
-        console.log('received change', change);
-        this.game.player_images[playerId] = change;
+        if (change == 'DELETE') {
+          console.log('Player deleted');
+          this.game.player_images.splice(playerId, 1);
+          this.game.players.splice(playerId, 1);
+        } else {
+          console.log('received change', change);
+          this.game.player_images[playerId] = change;
+        }
+        this.isGamePlayable();
         this.saveGame();
       }
     });
   }
+
+  isGamePlayable() {
+    if (this.game.players.length === 0) {
+      this.gamePlayable = false;
+    } else {
+      this.gamePlayable = true;
+    }
+    console.log('Game playable?', this.gamePlayable);
+  }
+
+  leaveGame() {
+    window.location.href = "/";
+  }
+
+  shareGame() {
+    console.log(window.location.href)
+  }
+
 }

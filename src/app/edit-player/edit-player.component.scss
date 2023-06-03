@@ -1,10 +1,16 @@
 .profilepicture {
-  height: 120px;
-  width: 120px;
+  height: 100px;
+  width: 100px;
   border-radius: 100%;
   cursor: pointer;
 
   &:hover {
     filter: brightness(1.15);
   }
+}
+
+.playerimageselection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }

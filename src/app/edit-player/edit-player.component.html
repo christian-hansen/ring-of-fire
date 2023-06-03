@@ -1,17 +1,9 @@
 <h1 mat-dialog-title>Edit Player</h1>
-
-<div mat-dialog-content>
-    <p>Please enter player name:</p>
-    <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput [(ngModel)]="name">
-    </mat-form-field>
+<div class="playerimageselection">
+<img class="profilepicture" [mat-dialog-close]="picture" *ngFor="let picture of allProfilePictures" src="./assets/img/profile/{{ picture }}">
 </div>
 
-<div mat-dialog-content>Choose an avatar</div>
-<img class="profilepicture" [mat-dialog-close]="picture" *ngFor="let picture of allProfilePictures" src="./assets/img/profile/{{ picture }}">
-
 <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <!-- <button mat-button [disabled]="name.length == 0" [mat-dialog-close]="name" cdkFocusInitial>Ok</button> -->
+    <button mat-button (click)="onNoClick()">Close</button>
+    <button mat-button color="warn" [mat-dialog-close]="'DELETE'" cdkFocusInitial>Delete player</button>
 </div>

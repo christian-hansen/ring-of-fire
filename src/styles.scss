@@ -10,13 +10,13 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-@media (min-width: 720px) {
+@media (min-width: 1000px) {
   .hide-desktop {
     display: none;
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1000px) {
     .hide-mobile {
       display: none;
     }

@@ -1,111 +1,158 @@
 .field {
-    width: 100vw;
-    height: 100vh;
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-stack {
-    position: relative;
+  position: relative;
 
-    img {
-        position: absolute;
-        width: 120px;
-    }
+  img {
+    position: absolute;
+    width: 120px;
+  }
 }
 
 .top-card {
-    cursor: pointer;
+  cursor: pointer;
 
-    transition: all 125ms ease-in-out;
+  transition: all 125ms ease-in-out;
 
-    &:hover {
-        transform: scale(1.1) translateY(-10px);
-    }
+  &:hover {
+    transform: scale(1.1) translateY(-10px);
+  }
 }
 
 .played-card {
-    transform: scale(1.2) translateX(140px) translateY(-180px) rotate(-10deg);
-    right: 25px;
+  transform: scale(1.1) translateX(140px) translateY(-180px) rotate(-10deg);
+  right: 25px;
 }
 
 .pick-card {
-    transition: all 125ms ease-in-out;
-    animation: pick-card-animation 1s ease-in-out;
-    transform: scale(1.2) translateX(140px) translateY(-180px) rotate(-10deg);
+  transition: all 125ms ease-in-out;
+  animation: pick-card-animation 1s ease-in-out;
+  transform: scale(1.1) translateX(140px) translateY(-180px) rotate(-10deg);
 }
 
 @keyframes pick-card-animation {
-    0% {transform: scale(1);}
-    40% {transform: scale(1.7);}
-    60% {transform: scale(1.7);}
-    100% {transform: scale(1.2) translateX(140px) translateY(-180px) rotate(-10deg);}
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.7);
+  }
+  60% {
+    transform: scale(1.7);
+  }
+  100% {
+    transform: scale(1.1) translateX(140px) translateY(-180px) rotate(-10deg);
+  }
 }
 
 .player-position {
-position: absolute;
-right: 0;
-z-index: 1;
+  position: absolute;
+  right: 0;
+  z-index: 1;
 }
 
 .btn-add {
-    position: absolute;
-    right: 32px;
-    bottom: 32px;
+  position: absolute;
+  right: 32px;
+  bottom: 32px;
 
-    @media (max-width: 720px) {
-        bottom: 128px;
-    }
+  @media (max-width: 1000px) {
+    bottom: 128px;
+    right: 8px;
+  }
 }
 
-.card-bottom {
-    position: absolute;
-    bottom: 32px;
-    left: 100px;
-    right: 100px;
+.btn-share {
+  position: absolute;
+  right: 32px;
+  bottom: 64px;
 
-    @media (max-width: 720px) {
-        width: 100%;
-        left: 0;
-        bottom: 0;
-        right: 0;
+  @media (max-width: 1000px) {
+    bottom: 190px;
+    right: 16px;
+  }
+}
+
+.btn-leave {
+    position: absolute;
+    right: 32px;
+    bottom: 64px;
+  
+    @media (max-width: 1000px) {
+      bottom: 238px;
+      right: 16px;
     }
+  }
+
+.card-bottom {
+  position: absolute;
+  bottom: 32px;
+  left: 100px;
+  right: 100px;
+
+  @media (max-width: 1000px) {
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.errormessage {
+  min-height: 50px;
+  background-color: white;
 }
 
 .scroll-container {
-    display: flex;
-position: absolute;
-left: 0;
-top: 0;
-right: 0;
-overflow-x: auto;
-overflow-y: hidden;
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
 
-  app-player-mobile{
+  app-player-mobile {
     margin-left: 8px;
   }
 }
 
 .gameOver {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  height: 100vh;
 
-    img {
-        width: 100vw;
-        @media (max-width: 720px) {
-        transform: scale(2);}
+  img {
+    width: 100vw;
+    @media (max-width: 1000px) {
+      transform: scale(2);
     }
+  }
 }
 
-app-player, app-player-mobile {
-    cursor: pointer;
+app-player,
+app-player-mobile {
+  cursor: pointer;
 
-    &:hover {
-        filter: brightness(1.1);
-    }
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+
+.preloadImage {
+  position: absolute;
+  top: 0;
+  height: 0px;
+  width: 0px;
+  opacity: 0;
+  z-index: -999;
 }
