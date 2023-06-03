@@ -1,5 +1,19 @@
+<mat-toolbar color="basic">
+    <span>Ring Of Fire</span>
+    <span class="icon-spacer"></span>
+    <button mat-icon-button (click)="openDialog()"><mat-icon>person_add</mat-icon></button>
+    <button mat-icon-button (click)="shareGame()"><mat-icon>share</mat-icon></button>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-position"><mat-icon>more_vert</mat-icon></button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="switchLanguage()">Switch language</button>
+        <button mat-menu-item (click)="shareGame()">About</button>
+        <button mat-menu-item (click)="leaveGame()">Leave game</button>
+    </mat-menu>
+</mat-toolbar>
+
+
 <app-player (click)="editPlayer(i)" *ngFor="let player of game.players; let i = index;"
-    [ngStyle]="{'top.px': 50 + (i * 80)}" [playerActive]="i == game.currentPlayer" [name]="player"
+    [ngStyle]="{'top.px': 80 + (i * 80)}" [playerActive]="i == game.currentPlayer" [name]="player"
     [image]="game.player_images[i]" class="player-position hide-mobile"></app-player>
 
 <div class="scroll-container hide-desktop">
@@ -8,7 +22,8 @@
         class="hide-desktop"></app-player-mobile>
 </div>
 
-<div *ngIf="!gameOver" class="field" style="background-image: url('./assets/img/background.jpg');">
+<!-- Game area -->
+<div *ngIf="!gameOver" class="field" style="background-image: url('./assets/img/background.jpg'); background-size: cover;">
     <div class="card-stack">
         <!-- Card stack -->
         <img *ngFor="let card of [0,1,2,3]; let i = index;" [ngStyle]="{'right.px': i * 5}"
@@ -20,30 +35,26 @@
         <!-- Current card (animation) -->
         <img (click)="takeCard()" *ngIf="game.pickCardAnimation" class="pick-card" style="right: 25px"
             src="assets/img/cards/{{ game.currentCard }}.png">
-    </div>
-</div>
+        </div>
 
+        <!-- Preload the next card -->
+        <img class="preloadImage" src="assets/img/cards/{{ game.stack[game.stack.length - 1] }}.png">
+    </div>
+    
+<!-- Game over screen -->
 <div *ngIf="gameOver" class="gameOver"><img src="./assets/img/game-over.jpg" alt="" srcset=""></div>
 
-
-<button mat-mini-fab color="disabled" (click)="leaveGame()" class="btn-leave">
-    <mat-icon>home</mat-icon>
-</button>
-<button mat-mini-fab color="disabled" (click)="shareGame()" class="btn-share">
-    <mat-icon>share</mat-icon>
-</button>
-<button mat-fab color="accent" (click)="openDialog()" class="btn-add">
-    <mat-icon>add</mat-icon>
-</button>
-
-<img class="preloadImage" src="assets/img/cards/{{ game.stack[game.stack.length - 1] }}.png">
-
 <!-- Text area at bottom -->
-<div *ngIf="gamePlayable">
-<app-game-info [card]="game.currentCard" class="card-bottom"></app-game-info></div>
-
-    <mat-card *ngIf="!gamePlayable" class="card-bottom">
-        <mat-card-title style="padding: 8px 16px">Please create a player to <span *ngIf="game.playedCards.length === 0;">start</span><span *ngIf="game.playedCards.length > 0;">continue</span></mat-card-title>
+    <!-- Text area for card related content displayed when game is playable -->
+    <div *ngIf="gamePlayable">
     
-        <mat-card-content>Please create add least one player by clicking the "+" button</mat-card-content>
-    </mat-card>
+    <app-game-info [card]="game.currentCard" class="card-bottom"></app-game-info>
+</div>
+
+    <!-- Text area for instructions displayed when game is not playable -->
+<mat-card *ngIf="!gamePlayable" class="card-bottom">
+    <mat-card-title style="padding: 8px 16px">Please create a player to <span
+            *ngIf="game.playedCards.length === 0;">start</span><span
+            *ngIf="game.playedCards.length > 0;">continue</span></mat-card-title>
+    <mat-card-content>Please create add least one player by clicking the "+" button</mat-card-content>
+</mat-card>

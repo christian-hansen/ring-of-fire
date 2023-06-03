@@ -1,7 +1,12 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import {
   Firestore,
@@ -16,7 +21,7 @@ import { EditPlayerComponent } from '../edit-player/edit-player.component';
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss'],
+  styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
@@ -26,8 +31,9 @@ export class GameComponent implements OnInit {
   gamePlayable = false;
   href: string;
   defaultPlayerImage: string = 'profile5.png';
+  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
-  constructor(public dialog: MatDialog, private router: ActivatedRoute) {
+  constructor(public dialog: MatDialog, private router: ActivatedRoute, public menu: MatMenuModule, public toolbar: MatToolbarModule) {
     console.log(this.router.url['value'][0]);
     console.log(this.router.url['value'][1]);
   }
@@ -47,7 +53,9 @@ export class GameComponent implements OnInit {
         this.game.currentPlayer = game.currentPlayer;
         this.game.pickCardAnimation = game.pickCardAnimation;
         this.game.currentCard = game.currentCard;
+        this.isGamePlayable();
       });
+      
     });
   }
 
@@ -132,11 +140,21 @@ export class GameComponent implements OnInit {
   }
 
   leaveGame() {
-    window.location.href = "/";
+    console.log('Leave game')
+    // window.location.href = "/";
   }
 
   shareGame() {
     console.log(window.location.href)
   }
+
+  switchLanguage() {
+    console.log('Change language')
+  }
+
+  openAbout() {
+    console.log('About')
+  }
+
 
 }

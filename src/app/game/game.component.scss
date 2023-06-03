@@ -1,6 +1,6 @@
 .field {
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 56px - 8px);
   max-width: 100%;
   display: flex;
   justify-content: center;
@@ -12,7 +12,11 @@
 
   img {
     position: absolute;
-    width: 120px;
+    width: 130px;
+
+    @media (max-height: 700px) {
+        width: 100px
+      }
   }
 }
 
@@ -58,36 +62,11 @@
   z-index: 1;
 }
 
-.btn-add {
-  position: absolute;
-  right: 32px;
-  bottom: 32px;
+.icon-spacer {
+    flex: 1 1 auto;
 
-  @media (max-width: 1000px) {
-    bottom: 128px;
-    right: 8px;
-  }
-}
-
-.btn-share {
-  position: absolute;
-  right: 32px;
-  bottom: 64px;
-
-  @media (max-width: 1000px) {
-    bottom: 190px;
-    right: 16px;
-  }
-}
-
-.btn-leave {
-    position: absolute;
-    right: 32px;
-    bottom: 64px;
-  
-    @media (max-width: 1000px) {
-      bottom: 238px;
-      right: 16px;
+    button {
+        cursor: pointer;
     }
   }
 
@@ -114,13 +93,17 @@
   display: flex;
   position: absolute;
   left: 0;
-  top: 0;
+  top: 56px;
   right: 0;
   overflow-x: auto;
   overflow-y: hidden;
 
   app-player-mobile {
     margin-left: 8px;
+  }
+
+  @media (min-width: 600px) {
+    top: 64px;
   }
 }
 

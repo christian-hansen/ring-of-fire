@@ -23,6 +23,9 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { PlayerMobileComponent } from './player-mobile/player-mobile.component';
 import { EditPlayerComponent } from './edit-player/edit-player.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,10 @@ import { EditPlayerComponent } from './edit-player/edit-player.component';
     FormsModule,
     MatInputModule,
     MatFormFieldModule,
+    MatMenuModule,
     BrowserAnimationsModule,
+    MatToolbarModule,
+    MatProgressBarModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
