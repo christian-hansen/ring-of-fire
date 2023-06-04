@@ -1,9 +1,18 @@
 <h1 mat-dialog-title><span translate>Edit Player</span></h1>
-<div class="playerimageselection">
+<div *ngIf="!permadialogue" class="playerimageselection">
 <img class="profilepicture" [mat-dialog-close]="picture" *ngFor="let picture of allProfilePictures" src="./assets/img/profile/{{ picture }}">
 </div>
 
-<div mat-dialog-actions>
+<div *ngIf="!permadialogue" mat-dialog-actions>
     <button mat-button (click)="onNoClick()"><span translate>Close</span></button>
-    <button mat-button color="warn" [mat-dialog-close]="'DELETE'" cdkFocusInitial><span translate>Delete player</span></button>
+    <button mat-button color="warn" (click)="openDeleteDialog()" cdkFocusInitial><span translate>Delete player</span></button>
+</div>
+
+<mat-dialog-content *ngIf="permadialogue">
+    <span translate>Do you really want to delete this player?</span>
+</mat-dialog-content>
+
+<div *ngIf="permadialogue" mat-dialog-actions>
+    <button mat-button (click)="closeDeleteDialog()"><span translate>Back</span></button>
+    <button mat-button color="warn" [mat-dialog-close]="'DELETE'" cdkFocusInitial><span translate>Yes, delete player</span></button>
 </div>

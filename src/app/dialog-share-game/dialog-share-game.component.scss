@@ -1,0 +1,14 @@
+.btn-share {
+    display: flex;
+    flex-direction: row-reverse;
+align-items: center;
+    width: calc(100% - 25px);
+    margin: 10px;
+    margin-left: 15px;
+}
+
+.link-text {
+word-break: break-all;
+    // width: 50%;
+    text-align: left;
+}

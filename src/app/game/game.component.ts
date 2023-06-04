@@ -20,6 +20,7 @@ import { EditPlayerComponent } from '../edit-player/edit-player.component';
 import { GameAboutComponent } from '../game-about/game-about.component';
 import { DialogExitintentComponent } from '../dialog-exitintent/dialog-exitintent.component';
 import {TranslateService} from '@ngx-translate/core';
+import { DialogShareGameComponent } from '../dialog-share-game/dialog-share-game.component';
 
 @Component({
   selector: 'app-game',
@@ -37,12 +38,13 @@ export class GameComponent implements OnInit {
   defaultPlayerImage: string = 'profile5.png';
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
-  constructor(public dialog: MatDialog, public dialog2: MatDialog, private router: ActivatedRoute, public menu: MatMenuModule, public toolbar: MatToolbarModule, public translate: TranslateService) {
+  constructor(public dialog: MatDialog, private router: ActivatedRoute, public menu: MatMenuModule, public toolbar: MatToolbarModule, public translate: TranslateService) {
     
   }
 
   async ngOnInit(): Promise<void> {
     this.newGame();
+
     this.router.params.subscribe(async (params) => {
       this.gameId = params['id'];
       const gamesCollection = collection(this.firestore, 'games');
@@ -61,9 +63,6 @@ export class GameComponent implements OnInit {
         this.isGamePlayable();
       });
       console.log(this.game.language);
-      // this.switchLanguage();
-      // this.switchLanguage();
-      // console.log(this.game.language);
     });
   }
 
@@ -120,6 +119,10 @@ export class GameComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogExitintentComponent)
   }
 
+  openShareDialog(): void {
+    const dialogRef = this.dialog.open(DialogShareGameComponent)
+  }
+
   nextPlayer() {
     this.game.currentPlayer++;
     this.game.currentPlayer =
@@ -155,11 +158,6 @@ export class GameComponent implements OnInit {
     console.log('Game playable?', this.gamePlayable);
   }
 
-
-  shareGame() {
-    console.log(window.location.href)
-  }
-
   switchLanguage() { 
     if (this.game.language === 'en' || this.game.language === '') {
     this.translate.use('de');
@@ -174,14 +172,5 @@ export class GameComponent implements OnInit {
       console.log(this.game.language);
     }
   }
-
-  setLanguage(input: string) {
-    if (input === 'de') {
-      this.translate.use('de');
-    this.game.language = 'de';
-    this.saveGame();
-    }
-  }
-
 
 }

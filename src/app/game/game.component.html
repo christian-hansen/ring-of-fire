@@ -2,12 +2,12 @@
     <span translate>Ring Of Fire</span>
     <span class="icon-spacer"></span>
     <button mat-icon-button (click)="openDialog()"><mat-icon>person_add</mat-icon></button>
-    <button mat-icon-button (click)="shareGame()"><mat-icon>share</mat-icon></button>
+    <button mat-icon-button (click)="openShareDialog()"><mat-icon>share</mat-icon></button>
     <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-position"><mat-icon>more_vert</mat-icon></button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="switchLanguage()"><span translate>Switch language</span></button>
-        <button mat-menu-item (click)="openAboutDialog()"><span translate>About</span></button>
-        <button mat-menu-item (click)="openExitDialog()"><span translate>Leave game</span></button>
+        <!-- <button mat-menu-item (click)="switchLanguage()"><span translate>Switch language</span></button> -->
+        <button mat-menu-item (click)="openAboutDialog()"><span translate>About this game</span></button>
+        <button mat-menu-item (click)="openExitDialog()"><span translate>Exit game</span></button>
     </mat-menu>
 </mat-toolbar>
 

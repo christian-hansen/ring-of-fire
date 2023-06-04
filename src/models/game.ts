@@ -42,7 +42,7 @@ export class Game {
       currentPlayer: this.currentPlayer,
       pickCardAnimation: this.pickCardAnimation,
       currentCard: this.currentCard,
-      language: 'de'
+      language: 'en'
     };
   }
 }
