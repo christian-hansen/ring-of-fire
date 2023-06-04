@@ -26,6 +26,8 @@ import { EditPlayerComponent } from './edit-player/edit-player.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { GameAboutComponent } from './game-about/game-about.component';
+import { DialogExitintentComponent } from './dialog-exitintent/dialog-exitintent.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     GameInfoComponent,
     PlayerMobileComponent,
     EditPlayerComponent,
+    GameAboutComponent,
+    DialogExitintentComponent,
   ],
   imports: [
     BrowserModule,

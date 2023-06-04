@@ -6,8 +6,8 @@
     <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-position"><mat-icon>more_vert</mat-icon></button>
     <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="switchLanguage()">Switch language</button>
-        <button mat-menu-item (click)="shareGame()">About</button>
-        <button mat-menu-item (click)="leaveGame()">Leave game</button>
+        <button mat-menu-item (click)="openAboutDialog()">About</button>
+        <button mat-menu-item (click)="openExitDialog()">Leave game</button>
     </mat-menu>
 </mat-toolbar>
 

@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Leave Game?</h1>
+<div mat-dialog-content>
+  <p>Do you really want to exit this game session? You can only re-enter by knowing the session id.</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No thanks</button>
+  <button mat-button color="warn" (click)="leaveGame()" cdkFocusInitial>Back to home</button>
+</div>

@@ -17,6 +17,8 @@ import {
 } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { EditPlayerComponent } from '../edit-player/edit-player.component';
+import { GameAboutComponent } from '../game-about/game-about.component';
+import { DialogExitintentComponent } from '../dialog-exitintent/dialog-exitintent.component';
 
 @Component({
   selector: 'app-game',
@@ -33,7 +35,7 @@ export class GameComponent implements OnInit {
   defaultPlayerImage: string = 'profile5.png';
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
-  constructor(public dialog: MatDialog, private router: ActivatedRoute, public menu: MatMenuModule, public toolbar: MatToolbarModule) {
+  constructor(public dialog: MatDialog, public dialog2: MatDialog, private router: ActivatedRoute, public menu: MatMenuModule, public toolbar: MatToolbarModule) {
     console.log(this.router.url['value'][0]);
     console.log(this.router.url['value'][1]);
   }
@@ -104,6 +106,14 @@ export class GameComponent implements OnInit {
     });
   }
 
+  openAboutDialog(): void {
+    const dialogRef = this.dialog.open(GameAboutComponent)
+  }
+
+  openExitDialog(): void {
+    const dialogRef = this.dialog.open(DialogExitintentComponent)
+  }
+
   nextPlayer() {
     this.game.currentPlayer++;
     this.game.currentPlayer =
@@ -139,10 +149,6 @@ export class GameComponent implements OnInit {
     console.log('Game playable?', this.gamePlayable);
   }
 
-  leaveGame() {
-    console.log('Leave game')
-    // window.location.href = "/";
-  }
 
   shareGame() {
     console.log(window.location.href)
@@ -150,10 +156,6 @@ export class GameComponent implements OnInit {
 
   switchLanguage() {
     console.log('Change language')
-  }
-
-  openAbout() {
-    console.log('About')
   }
 
 
