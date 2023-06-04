@@ -24,7 +24,7 @@ ngOnInit(): void {
 async newGame() {
   let game = new Game;
   const gamesCollection = collection(this.firestore, 'games');
-  let gameJson = game.toJSON();
+  let gameJson = game.toJSONinit();
   await addDoc(gamesCollection, gameJson).then((gameInfo: any) => {    
     this.router.navigateByUrl('/game/' + gameInfo.id)
   });

@@ -33,13 +33,11 @@ export class GameComponent implements OnInit {
   gameOver = false;
   gamePlayable = false;
   href: string;
-  language: string = 'en'
+
   defaultPlayerImage: string = 'profile5.png';
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
   constructor(public dialog: MatDialog, public dialog2: MatDialog, private router: ActivatedRoute, public menu: MatMenuModule, public toolbar: MatToolbarModule, public translate: TranslateService) {
-    console.log(this.router.url['value'][0]);
-    console.log(this.router.url['value'][1]);
     
   }
 
@@ -58,9 +56,14 @@ export class GameComponent implements OnInit {
         this.game.currentPlayer = game.currentPlayer;
         this.game.pickCardAnimation = game.pickCardAnimation;
         this.game.currentCard = game.currentCard;
+        this.game.language = game.language;
+        console.log(this.game.language);
         this.isGamePlayable();
       });
-      
+      console.log(this.game.language);
+      // this.switchLanguage();
+      // this.switchLanguage();
+      // console.log(this.game.language);
     });
   }
 
@@ -157,13 +160,26 @@ export class GameComponent implements OnInit {
     console.log(window.location.href)
   }
 
-  switchLanguage() {
-    if (this.language == 'en') {
+  switchLanguage() { 
+    if (this.game.language === 'en' || this.game.language === '') {
     this.translate.use('de');
-    this.language = 'de';}
-    else {
+    this.game.language = 'de';
+    this.saveGame();
+    console.log(this.game.language);
+}
+    else if (this.game.language === 'de' || this.game.language === undefined) {
       this.translate.use('en');
-      this.language = 'en';
+      this.game.language = 'en';
+      this.saveGame();
+      console.log(this.game.language);
+    }
+  }
+
+  setLanguage(input: string) {
+    if (input === 'de') {
+      this.translate.use('de');
+    this.game.language = 'de';
+    this.saveGame();
     }
   }
 
