@@ -1,13 +1,13 @@
-<h1 mat-dialog-title>Add new player</h1>
+<h1 mat-dialog-title><span translate>Add new player</span></h1>
 
 <div mat-dialog-content>
-    <p>Please enter player name:</p>
+    <p><span translate>Please enter player name:</span></p>
     <mat-form-field>
-        <mat-label>Name</mat-label>
+        <mat-label><span translate>Name</span></mat-label>
         <input matInput [(ngModel)]="name">
     </mat-form-field>
 </div>
 <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button (click)="onNoClick()"><span translate>No Thanks</span></button>
     <button mat-button [disabled]="name.length == 0" [mat-dialog-close]="name" cdkFocusInitial>Ok</button>
 </div>

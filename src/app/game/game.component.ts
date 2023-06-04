@@ -19,6 +19,7 @@ import { ActivatedRoute } from '@angular/router';
 import { EditPlayerComponent } from '../edit-player/edit-player.component';
 import { GameAboutComponent } from '../game-about/game-about.component';
 import { DialogExitintentComponent } from '../dialog-exitintent/dialog-exitintent.component';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-game',
@@ -32,12 +33,14 @@ export class GameComponent implements OnInit {
   gameOver = false;
   gamePlayable = false;
   href: string;
+  language: string = 'en'
   defaultPlayerImage: string = 'profile5.png';
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
-  constructor(public dialog: MatDialog, public dialog2: MatDialog, private router: ActivatedRoute, public menu: MatMenuModule, public toolbar: MatToolbarModule) {
+  constructor(public dialog: MatDialog, public dialog2: MatDialog, private router: ActivatedRoute, public menu: MatMenuModule, public toolbar: MatToolbarModule, public translate: TranslateService) {
     console.log(this.router.url['value'][0]);
     console.log(this.router.url['value'][1]);
+    
   }
 
   async ngOnInit(): Promise<void> {
@@ -155,7 +158,13 @@ export class GameComponent implements OnInit {
   }
 
   switchLanguage() {
-    console.log('Change language')
+    if (this.language == 'en') {
+    this.translate.use('de');
+    this.language = 'de';}
+    else {
+      this.translate.use('en');
+      this.language = 'en';
+    }
   }
 
 

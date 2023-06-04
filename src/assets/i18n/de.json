@@ -1,0 +1,21 @@
+{
+	"Add new player": "Spieler hinzufügen",
+	"Please enter player name:": "Bitte Spielernamen eingeben:",
+	"Name": "Name",
+	"No Thanks": "Nein Danke",
+	"Leave Game?": "Spiel verlassen?",
+	"Do you really want to exit this game session? You can only re-enter by knowing the session id.": "Möchtest Du wirklich die Spiel-Session verlassen? Du kannst nur in das Spiel zurück kehren, wenn Du die Session ID kennst.",
+	"No thanks": "Nein danke",
+	"Back to home": "Zurück zu Start",
+	"Edit Player": "Spieler bearbeiten",
+	"Close": "Schließen",
+	"Delete player": "Spieler löschen",
+	"Ring Of Fire": "Ring des Feuers",
+	"Switch language": "Sprache wechseln",
+	"About": "Informationen",
+	"Leave game": "Spiel verlassen",
+	"Please create a player to": "Bitte erstelle einen Spieler, um ",
+	"start": "zu starten",
+	"continue": "weiter zu spielen",
+	"Please create add least one player by clicking the \"+\" button": "Bitte erstelle mindestens einen Spieler, indem Du das \"+\" klickst."
+}

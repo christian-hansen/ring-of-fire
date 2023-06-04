@@ -28,6 +28,14 @@ import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { GameAboutComponent } from './game-about/game-about.component';
 import { DialogExitintentComponent } from './dialog-exitintent/dialog-exitintent.component';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClientModule, HttpClient} from '@angular/common/http';
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -41,6 +49,7 @@ import { DialogExitintentComponent } from './dialog-exitintent/dialog-exitintent
     EditPlayerComponent,
     GameAboutComponent,
     DialogExitintentComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -56,6 +65,15 @@ import { DialogExitintentComponent } from './dialog-exitintent/dialog-exitintent
     BrowserAnimationsModule,
     MatToolbarModule,
     MatProgressBarModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+  }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),

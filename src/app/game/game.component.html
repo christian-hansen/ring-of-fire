@@ -1,13 +1,13 @@
 <mat-toolbar color="basic">
-    <span>Ring Of Fire</span>
+    <span translate>Ring Of Fire</span>
     <span class="icon-spacer"></span>
     <button mat-icon-button (click)="openDialog()"><mat-icon>person_add</mat-icon></button>
     <button mat-icon-button (click)="shareGame()"><mat-icon>share</mat-icon></button>
     <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-position"><mat-icon>more_vert</mat-icon></button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="switchLanguage()">Switch language</button>
-        <button mat-menu-item (click)="openAboutDialog()">About</button>
-        <button mat-menu-item (click)="openExitDialog()">Leave game</button>
+        <button mat-menu-item (click)="switchLanguage()"><span translate>Switch language</span></button>
+        <button mat-menu-item (click)="openAboutDialog()"><span translate>About</span></button>
+        <button mat-menu-item (click)="openExitDialog()"><span translate>Leave game</span></button>
     </mat-menu>
 </mat-toolbar>
 
@@ -53,8 +53,8 @@
 
     <!-- Text area for instructions displayed when game is not playable -->
 <mat-card *ngIf="!gamePlayable" class="card-bottom">
-    <mat-card-title style="padding: 8px 16px">Please create a player to <span
-            *ngIf="game.playedCards.length === 0;">start</span><span
-            *ngIf="game.playedCards.length > 0;">continue</span></mat-card-title>
-    <mat-card-content>Please create add least one player by clicking the "+" button</mat-card-content>
+    <mat-card-title style="padding: 8px 16px"><span translate>Please create a player to </span><span
+            *ngIf="game.playedCards.length === 0;" translate="">start</span><span
+            *ngIf="game.playedCards.length > 0;" translate="">continue</span></mat-card-title>
+    <mat-card-content><span translate>Please create add least one player by clicking the "+" button</span></mat-card-content>
 </mat-card>
