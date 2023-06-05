@@ -1,0 +1,14 @@
+h2 {
+    padding: 10px 10px 0px 10px;
+    margin: 0px;
+}
+
+.loadable-games {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+
+    .title {
+        font-weight: 800;
+    }
+}

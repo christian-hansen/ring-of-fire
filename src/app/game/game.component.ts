@@ -53,6 +53,8 @@ export class GameComponent implements OnInit {
       this.gameId = params['id'];
       const gamesCollection = collection(this.firestore, 'games');
       const gameDocRef = doc(gamesCollection, this.gameId);
+      console.log(gameDocRef);
+      
 
       docData(gameDocRef).subscribe((game: any) => {
         this.game.players = game.players;
