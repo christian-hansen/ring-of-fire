@@ -3,10 +3,10 @@ import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import {
   Firestore,
@@ -19,13 +19,13 @@ import { ActivatedRoute } from '@angular/router';
 import { EditPlayerComponent } from '../edit-player/edit-player.component';
 import { GameAboutComponent } from '../game-about/game-about.component';
 import { DialogExitintentComponent } from '../dialog-exitintent/dialog-exitintent.component';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { DialogShareGameComponent } from '../dialog-share-game/dialog-share-game.component';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
+  styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
@@ -38,9 +38,13 @@ export class GameComponent implements OnInit {
   defaultPlayerImage: string = 'profile5.png';
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
-  constructor(public dialog: MatDialog, private router: ActivatedRoute, public menu: MatMenuModule, public toolbar: MatToolbarModule, public translate: TranslateService) {
-    
-  }
+  constructor(
+    public dialog: MatDialog,
+    private router: ActivatedRoute,
+    public menu: MatMenuModule,
+    public toolbar: MatToolbarModule,
+    public translate: TranslateService
+  ) {}
 
   async ngOnInit(): Promise<void> {
     this.newGame();
@@ -59,10 +63,9 @@ export class GameComponent implements OnInit {
         this.game.pickCardAnimation = game.pickCardAnimation;
         this.game.currentCard = game.currentCard;
         this.game.language = game.language;
-        console.log(this.game.language);
         this.isGamePlayable();
+        this.loadLanguage();
       });
-      console.log(this.game.language);
     });
   }
 
@@ -112,15 +115,15 @@ export class GameComponent implements OnInit {
   }
 
   openAboutDialog(): void {
-    const dialogRef = this.dialog.open(GameAboutComponent)
+    const dialogRef = this.dialog.open(GameAboutComponent);
   }
 
   openExitDialog(): void {
-    const dialogRef = this.dialog.open(DialogExitintentComponent)
+    const dialogRef = this.dialog.open(DialogExitintentComponent);
   }
 
   openShareDialog(): void {
-    const dialogRef = this.dialog.open(DialogShareGameComponent)
+    const dialogRef = this.dialog.open(DialogShareGameComponent);
   }
 
   nextPlayer() {
@@ -136,11 +139,9 @@ export class GameComponent implements OnInit {
     dialogRef.afterClosed().subscribe((change: string) => {
       if (change) {
         if (change == 'DELETE') {
-          console.log('Player deleted');
           this.game.player_images.splice(playerId, 1);
           this.game.players.splice(playerId, 1);
         } else {
-          console.log('received change', change);
           this.game.player_images[playerId] = change;
         }
         this.isGamePlayable();
@@ -155,22 +156,23 @@ export class GameComponent implements OnInit {
     } else {
       this.gamePlayable = true;
     }
-    console.log('Game playable?', this.gamePlayable);
   }
 
-  switchLanguage() { 
-    if (this.game.language === 'en' || this.game.language === '') {
-    this.translate.use('de');
-    this.game.language = 'de';
-    this.saveGame();
-    console.log(this.game.language);
-}
-    else if (this.game.language === 'de' || this.game.language === undefined) {
+  switchLanguage() {
+    if (this.game.language === 'en') {
+      this.translate.use('de');
+      this.game.language = 'de';
+      this.saveGame();
+    } else {
       this.translate.use('en');
       this.game.language = 'en';
       this.saveGame();
-      console.log(this.game.language);
     }
   }
 
+  loadLanguage() {
+    if (this.game.language === 'de') {
+      this.translate.use('de');
+    }
+  }
 }
