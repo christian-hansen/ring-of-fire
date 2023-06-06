@@ -5,7 +5,7 @@
     <button mat-icon-button (click)="openShareDialog()"><mat-icon>share</mat-icon></button>
     <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-position"><mat-icon>more_vert</mat-icon></button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="switchLanguage()"><span translate>Switch language</span></button>
+        <!-- <button mat-menu-item (click)="switchLanguage()"><span translate>Switch language</span></button> -->
         <button mat-menu-item (click)="openAboutDialog()"><span translate>About this game</span></button>
         <button mat-menu-item (click)="openExitDialog()"><span translate>Exit game</span></button>
     </mat-menu>
@@ -56,5 +56,5 @@
     <mat-card-title style="padding: 8px 16px"><span translate>Please create a player to </span><span
             *ngIf="game.playedCards.length === 0;" translate="">start</span><span
             *ngIf="game.playedCards.length > 0;" translate="">continue</span></mat-card-title>
-    <mat-card-content><span translate>Please create add least one player by clicking the "+" button</span></mat-card-content>
+    <mat-card-content><span translate>Create add least one player by clicking the "+" button. After creation any player can be edited by clicking on the profile picture.</span></mat-card-content>
 </mat-card>

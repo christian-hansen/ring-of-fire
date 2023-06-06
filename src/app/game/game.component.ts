@@ -83,6 +83,7 @@ export class GameComponent implements OnInit {
   }
 
   takeCard() {
+    console.log(this.game.language);
     if (this.gamePlayable) {
       if (this.game.stack.length == 0) {
         this.gameOver = true;
