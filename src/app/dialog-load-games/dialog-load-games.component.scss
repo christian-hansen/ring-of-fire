@@ -4,11 +4,14 @@ h2 {
 }
 
 .loadable-games {
+    a {
     display: flex;
     gap: 10px;
     padding: 10px;
+    &:visited {text-decoration:none;}}
 
     .title {
         font-weight: 800;
     }
+
 }

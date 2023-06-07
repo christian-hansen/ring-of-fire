@@ -42,13 +42,26 @@
     cursor: pointer;
 
     &:hover {
-      background-color: yellow;
+      background-color: rgb(177, 255, 129);
     }
 
     @media (max-width: 960px) {
     font-size: 32px;
       width: 300px;
     }
+  }
+
+  .load-btn{
+      background-color: grey;
+
+    &:hover {
+      background-color: rgb(177, 255, 129);
+    }
+
+    @media (max-width: 960px) {
+      font-size: 32px;
+        width: 300px;
+      }
   }
 
   img {

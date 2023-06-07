@@ -1,9 +1,8 @@
 <h2>Enter existing game</h2>
-<div class="loadable-games">
-    <div class="title">ID</div>
-    <!-- <div *ngFor="game in games;">{{game.}}</div> -->
-    <div>id...</div>
+<div class="loadable-games" *ngFor="let game of allGames;">
+    <a href="/game/{{game.id}}">
     <div class="title">Players</div>
-    <div>2</div>
-    <!-- <button (click)="logit()"></button> -->
+    <div>{{game.players}}</div>
+    <div class="title">ID</div>
+    <div>{{game.id}}</div></a>
 </div>
