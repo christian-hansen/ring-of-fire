@@ -3,10 +3,7 @@ import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import {
   Firestore,
@@ -21,6 +18,7 @@ import { GameAboutComponent } from '../game-about/game-about.component';
 import { DialogExitintentComponent } from '../dialog-exitintent/dialog-exitintent.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogShareGameComponent } from '../dialog-share-game/dialog-share-game.component';
+import { LanguagetransferService } from '../languagetransfer.service';
 
 @Component({
   selector: 'app-game',
@@ -43,7 +41,8 @@ export class GameComponent implements OnInit {
     private router: ActivatedRoute,
     public menu: MatMenuModule,
     public toolbar: MatToolbarModule,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private languagetransfer: LanguagetransferService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -54,7 +53,6 @@ export class GameComponent implements OnInit {
       const gamesCollection = collection(this.firestore, 'games');
       const gameDocRef = doc(gamesCollection, this.gameId);
       console.log(gameDocRef);
-      
 
       docData(gameDocRef).subscribe((game: any) => {
         this.game.players = game.players;
@@ -65,6 +63,7 @@ export class GameComponent implements OnInit {
         this.game.pickCardAnimation = game.pickCardAnimation;
         this.game.currentCard = game.currentCard;
         this.game.language = game.language;
+        this.languagetransfer.setData(game.language);
         this.isGamePlayable();
         this.loadLanguage();
       });
@@ -136,7 +135,6 @@ export class GameComponent implements OnInit {
   }
 
   editPlayer(playerId: number) {
-    console.log('Edit player', playerId);
     const dialogRef = this.dialog.open(EditPlayerComponent);
 
     dialogRef.afterClosed().subscribe((change: string) => {
@@ -165,10 +163,12 @@ export class GameComponent implements OnInit {
     if (this.game.language === 'en') {
       this.translate.use('de');
       this.game.language = 'de';
+      this.languagetransfer.setData(this.game.language);
       this.saveGame();
     } else {
       this.translate.use('en');
       this.game.language = 'en';
+      this.languagetransfer.setData(this.game.language);
       this.saveGame();
     }
   }
